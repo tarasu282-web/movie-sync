@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Movie Sync 🎬</title>
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <div id="setup-screen" class="screen">
+    <div class="card">
+      <h1>🎬 Movie Sync</h1>
+      <p class="subtitle">Watch your own downloaded movie, perfectly in sync.</p>
+
+      <label>Room code <span class="hint">(both of you use the same one)</span></label>
+      <input id="room-input" type="text" placeholder="e.g. tamil-swathi" />
+
+      <label>Your name</label>
+      <input id="name-input" type="text" placeholder="e.g. Tamil" />
+
+      <button id="join-btn">Join Room</button>
+      <p class="footnote">Both people must have the exact same movie file downloaded locally.</p>
+    </div>
+  </div>
+
+  <div id="watch-screen" class="screen hidden">
+    <div class="topbar">
+      <div class="room-info">Room: <strong id="room-label"></strong> · <span id="presence-label">1 online</span></div>
+      <label class="file-btn">
+        📂 Load Movie
+        <input id="file-input" type="file" accept="video/*" hidden />
+      </label>
+      <button id="resync-btn" title="Force everyone to match your current playback">🔄 Force Sync</button>
+      <button id="camera-btn" title="Turn on video chat">📷 Video Chat</button>
+    </div>
+
+    <video id="video" controls></video>
+
+    <div id="video-chat" class="video-chat hidden">
+      <div class="pip-wrap">
+        <video id="remote-video" autoplay playsinline></video>
+        <video id="local-video" autoplay playsinline muted></video>
+      </div>
+      <div class="video-chat-controls">
+        <button id="mic-toggle-btn" title="Mute/unmute mic">🎤</button>
+        <button id="cam-toggle-btn" title="Turn camera on/off">📹</button>
+        <button id="hangup-btn" title="End video chat">📞 End</button>
+      </div>
+    </div>
+
+    <div class="chat-panel">
+      <div id="chat-log"></div>
+      <div class="chat-input-row">
+        <input id="chat-input" type="text" placeholder="Say something..." />
+        <button id="chat-send">Send</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="client.js"></script>
+</body>
+</html>
